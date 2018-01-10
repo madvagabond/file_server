@@ -15,14 +15,21 @@
 %%====================================================================
 
 start(_StartType, _StartArgs) ->
-    
-  Dispatch = cowboy_router:compile([ {'_', [ 
-    {"/store/:id", file_store, []}
-  ]}                                     
-                                   ]),
-  {ok, _} = cowboy:start_http(http, 100, [{port, 8080}], [
-    {env, [{dispatch, Dispatch}]}
+  application:start(sasl),	
+  application:start(crypto),
+  application:start(cowlib),
+
+  application:start(ranch),
+  application:start(cowboy),
+
+  file:make_dir("store"),  
+  Dispatch = cowboy_router:compile([
+    {'_', [{"/store/:id", file_store, []}]}    
   ]),
+
+  {ok, _} = cowboy:start_clear(http, [{port, 8080}],  #{
+    env => #{dispatch => Dispatch} }
+  ),
   magic_man_sup:start_link().
 
 %%--------------------------------------------------------------------
