@@ -1,4 +1,4 @@
-{application, magic_man,
+{application, file_server,
  [{description, "An OTP application"},
   {vsn, "0.1.0"},
   {registered, []},
