@@ -3,7 +3,7 @@
 %% @end
 %%%-------------------------------------------------------------------
 
--module(magic_man_sup).
+-module(file_server_sup).
 
 -behaviour(supervisor).
 
