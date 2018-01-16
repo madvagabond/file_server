@@ -57,7 +57,6 @@ stream_file(FD, Rep) ->
 init(Req, State) ->
   Method = cowboy_req:method(Req),
   ID = get_id(Req),
-  io:fwrite("HIT ~n", []),
   case Method of 
     <<"POST">> ->
       Rep = create(ID, Req), 
