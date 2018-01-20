@@ -24,7 +24,7 @@ upload_file(Req0, FD) ->
 
 create(ID, Req) -> 
   case cowboy_req:read_part(Req, #{}) of 
-    {ok, Headers, Req2} -> 
+    {ok, _, Req2} -> 
       {ok, FD} = file:open(store_path(ID), [append]),
       upload_file(Req2, FD),
       Body = io_lib:format("File ~p was uploaded to store ~n", [ID]),

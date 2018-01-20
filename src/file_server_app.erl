@@ -24,7 +24,8 @@ start(_StartType, _StartArgs) ->
 
   file:make_dir("store"),  
   Dispatch = cowboy_router:compile([
-    {'_', [{"/store/:id", file_store, []}]}    
+    {'_', [{"/store/:id", file_store, []}]}, 
+    {'_', [{"/ping", health_check, []}] }
   ]),
 
   {ok, _} = cowboy:start_clear(http, [{port, 8080}],  #{
