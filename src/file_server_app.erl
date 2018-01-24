@@ -15,20 +15,15 @@
 %%====================================================================
 
 start(_StartType, _StartArgs) ->
-  application:start(sasl),	
-  application:start(crypto),
-  application:start(cowlib),
-
-  application:start(ranch),
-  application:start(cowboy),
-
   file:make_dir("store"),  
+  {ok, PortC} = application:get_env(port), 
+  {Port, _} = string:to_integer(PortC),
   Dispatch = cowboy_router:compile([
     {'_', [{"/store/:id", file_store, []}]}, 
     {'_', [{"/ping", health_check, []}] }
   ]),
 
-  {ok, _} = cowboy:start_clear(http, [{port, 8080}],  #{
+  {ok, _} = cowboy:start_clear(http, [{port, Port}],  #{
     env => #{dispatch => Dispatch} }
   ),
   file_server_sup:start_link().
