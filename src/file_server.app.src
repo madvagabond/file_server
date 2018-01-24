@@ -2,7 +2,7 @@
  [{description, "An OTP application"},
   {vsn, "0.1.0"},
   {registered, []},
-  {mod, { magic_man_app, []}},
+  {mod, { file_server_app, []}},
   {applications,
    [kernel,
     stdlib
