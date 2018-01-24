@@ -31,7 +31,7 @@ start(_StartType, _StartArgs) ->
   {ok, _} = cowboy:start_clear(http, [{port, 8080}],  #{
     env => #{dispatch => Dispatch} }
   ),
-  magic_man_sup:start_link().
+  file_server_sup:start_link().
 
 %%--------------------------------------------------------------------
 stop(_State) ->
